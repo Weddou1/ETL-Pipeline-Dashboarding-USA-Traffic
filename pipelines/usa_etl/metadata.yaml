@@ -1,0 +1,241 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - functions
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load csv traffic
+  retry_config: null
+  status: executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_csv_traffic
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks:
+  - dim_source
+  - dim_cond_wind
+  - dim_wind
+  - dim_airport_code
+  - dim_location
+  - dim_accident_location
+  - dim_weather_cond
+  - dim_weather
+  - dim_volatile_day_period
+  - dim_volatile_road_attribute
+  - fact_accidents
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: functions
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks:
+  - load_csv_traffic
+  uuid: functions
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - fact_accidents
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_source
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_source
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dim_wind
+  - fact_accidents
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_cond_wind
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_cond_wind
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - fact_accidents
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_wind
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  - dim_cond_wind
+  uuid: dim_wind
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dim_accident_location
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_airport_code
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_airport_code
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dim_accident_location
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_location
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_location
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_accident_location
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  - dim_airport_code
+  - dim_location
+  uuid: dim_accident_location
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dim_weather
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_weather_cond
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_weather_cond
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_weather
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  - dim_weather_cond
+  uuid: dim_weather
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - fact_accidents
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_volatile_day_period
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_volatile_day_period
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - fact_accidents
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_volatile_road_attribute
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_volatile_road_attribute
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: fact_accidents
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  - dim_volatile_day_period
+  - dim_volatile_road_attribute
+  - dim_source
+  - dim_cond_wind
+  - dim_wind
+  uuid: fact_accidents
+callbacks: []
+conditionals: []
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: USA ETL
+notification_config: {}
+spark_config: {}
+type: python
+updated_at: '2023-07-09 22:24:42'
+uuid: usa_etl
+variables: {}
+widgets: []

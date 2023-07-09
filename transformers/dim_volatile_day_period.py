@@ -3,7 +3,6 @@ if 'transformer' not in globals():
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
-
 def get_unique_values(df,columns):
     return df[columns].drop_duplicates().reset_index(drop=True)
 
@@ -12,10 +11,17 @@ def get_id_column(df,column_name):
 
 @transformer
 def transform(df, *args, **kwargs):
-    dim_airport_code=get_unique_values(df,['Airport_Code'])
-    get_id_column(dim_airport_code,"dim_airport_code_id")
+    
+    dim_volatile_day_period=get_unique_values(df,['Sunrise_Sunset', 'Civil_Twilight', 'Nautical_Twilight',
+       'Astronomical_Twilight']).astype(str).replace({'Day': '1', 'Night': '0','nan': 'N'})
 
-    return dim_airport_code
+    binary_day=dim_volatile_day_period.apply(lambda row: ''.join(row.astype(str)), axis=1)
+
+    dim_volatile_day_period=get_unique_values(df,['Sunrise_Sunset', 'Civil_Twilight', 'Nautical_Twilight',
+       'Astronomical_Twilight'])
+    dim_volatile_day_period["binary_day"]=binary_day
+
+    return dim_volatile_day_period
 
 
 @test

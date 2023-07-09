@@ -3,7 +3,6 @@ if 'transformer' not in globals():
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
-
 def get_unique_values(df,columns):
     return df[columns].drop_duplicates().reset_index(drop=True)
 
@@ -12,10 +11,11 @@ def get_id_column(df,column_name):
 
 @transformer
 def transform(df, *args, **kwargs):
-    dim_airport_code=get_unique_values(df,['Airport_Code'])
-    get_id_column(dim_airport_code,"dim_airport_code_id")
+   
+    dim_weather_cond=get_unique_values(df,['Weather_Condition'])
+    get_id_column(dim_weather_cond,"dim_weather_cond_id")
 
-    return dim_airport_code
+    return dim_weather_cond
 
 
 @test
