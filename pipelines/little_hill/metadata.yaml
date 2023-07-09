@@ -1,0 +1,16 @@
+blocks: []
+callbacks: []
+conditionals: []
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: little hill
+notification_config: {}
+spark_config: {}
+type: python
+updated_at: '2023-07-07 13:12:42'
+uuid: little_hill
+widgets: []

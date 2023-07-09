@@ -1,0 +1,113 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - functions
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load csv traffic
+  retry_config: null
+  status: executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_csv_traffic
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks:
+  - dim_source
+  - dim_cond_wind
+  - dim_wind
+  - dim_airport_code
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: functions
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks:
+  - load_csv_traffic
+  uuid: functions
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_source
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_source
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dim_wind
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_cond_wind
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_cond_wind
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_wind
+  retry_config: null
+  status: executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  - dim_cond_wind
+  uuid: dim_wind
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: dim_airport_code
+  retry_config: null
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - functions
+  uuid: dim_airport_code
+callbacks: []
+conditionals: []
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: late rain
+notification_config: {}
+spark_config: {}
+type: python
+updated_at: '2023-07-09 18:48:21'
+uuid: late_rain
+variables: {}
+widgets: []
