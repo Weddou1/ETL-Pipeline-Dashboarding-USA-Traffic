@@ -44,15 +44,9 @@ def transform(df, dim_volatile_day_period, dim_volatile_road_attribute,dim_sourc
     fact_accidents["Wind_Speed(mph)"]=df["Wind_Speed(mph)"]
     fact_accidents["Precipitation(in)"]=df["Precipitation(in)"]
 
-    print("TEST 4")
-    print(type(dim_source))
-    print(type(dim_cond_wind))
-    print(type(dim_wind))
-
 
     fact_accidents=fact_accidents.merge(dim_source,on="Source",how="left").merge(dim_cond_wind,on="Wind_Direction",how="left").merge(dim_wind,on=["dim_cond_wind_id","Wind_Chill(F)","Wind_Speed(mph)","Precipitation(in)"],how="left")
 
-    print("TEST 5")
 
     fact_final_columns=fact_accidents.columns.drop(['Source',
        'Wind_Direction', 'Wind_Chill(F)', 'Wind_Speed(mph)',

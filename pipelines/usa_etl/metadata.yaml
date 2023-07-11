@@ -45,6 +45,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - fact_accidents
+  - sql_insert_dim_source
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -62,6 +63,7 @@ blocks:
   downstream_blocks:
   - dim_wind
   - fact_accidents
+  - sql_insert_dimcondwind
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -78,6 +80,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - fact_accidents
+  - sql_insert_dimwind
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -95,6 +98,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - dim_accident_location
+  - sql_insert_dim_airport_code
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -111,6 +115,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - dim_accident_location
+  - sql_insert_dim_location
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -223,6 +228,105 @@ blocks:
   - dim_cond_wind
   - dim_wind
   uuid: fact_accidents
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks:
+  - sql_insert_dim_source
+  - sql_insert_dimcondwind
+  - sql_insert_dimwind
+  - sql_insert_dim_airport_code
+  - sql_insert_dim_location
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: database_creator
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks: []
+  uuid: database_creator
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dim_location
+  retry_config: null
+  status: updated
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_location
+  uuid: sql_insert_dim_location
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dim_airport_code
+  retry_config: null
+  status: updated
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_airport_code
+  uuid: sql_insert_dim_airport_code
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dim_source
+  retry_config: null
+  status: updated
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_source
+  uuid: sql_insert_dim_source
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dimCondWind
+  retry_config: null
+  status: updated
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_cond_wind
+  uuid: sql_insert_dimcondwind
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dimwind
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_wind
+  uuid: sql_insert_dimwind
 callbacks: []
 conditionals: []
 data_integration: null
@@ -235,7 +339,7 @@ name: USA ETL
 notification_config: {}
 spark_config: {}
 type: python
-updated_at: '2023-07-09 22:24:42'
+updated_at: '2023-07-11 21:30:27'
 uuid: usa_etl
 variables: {}
 widgets: []
