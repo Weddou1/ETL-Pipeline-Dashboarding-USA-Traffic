@@ -3,7 +3,6 @@ if 'custom' not in globals():
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
-
 import psycopg2
 import math
 
@@ -17,33 +16,27 @@ def escape_single_quotes(value):
     return value
 
 @custom
-def transform_custom(data, dim_location):
+def transform_custom(data, dim_accident_location):
     """
-    Index(['dim_location_id', 'Street', 'City', 'Zipcode', 'State', 'County',
-       'Country', 'Timezone'],
-      dtype='object')
+    Index(['Start_Lat', 'Start_Lng', 'dim_location_id',
+     'dim_airport_code_id'], dtype='object')
+
 
 
     """
     conn = psycopg2.connect("dbname=USAAccidents user=postgres password=admin")
     cur = conn.cursor()
-    for index, row in dim_location.iterrows():
+    for index, row in dim_accident_location.iterrows():
         try:
             conn.autocommit = False
-
-            row["Street"] = escape_single_quotes(row["Street"]) 
-            row["City"] = escape_single_quotes(row["City"]) 
-            row["Zipcode"] = escape_single_quotes(row["Zipcode"]) 
-            row["State"] = escape_single_quotes(row["State"]) 
-            row["County"] = escape_single_quotes(row["County"]) 
-            row["Country"] = escape_single_quotes(row["Country"]) 
-            row["Timezone"] = escape_single_quotes(row["Timezone"]) 
             
             
             command = f"""
-                        INSERT INTO Dimlocation
-                        VALUES ({row["dim_location_id"]}, '{row["Street"]}','{row["City"]}','{row["Zipcode"]}',
-                        '{row["State"]}','{row["County"]}','{row["Country"]}','{row["Timezone"]}')
+                        INSERT INTO Dimaccidentlocation
+                        VALUES ({row["Start_Lat"]}, 
+                                {row["Start_Lng"]},
+                                {row["dim_airport_code_id"]},
+                                {row["dim_location_id"]})
                         ON CONFLICT DO NOTHING;
                     """
             cur.execute(command)
@@ -57,7 +50,6 @@ def transform_custom(data, dim_location):
 
     cur.close()
     conn.close()
-
 
 
 @test

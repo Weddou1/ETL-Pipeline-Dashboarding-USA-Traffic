@@ -17,33 +17,25 @@ def escape_single_quotes(value):
     return value
 
 @custom
-def transform_custom(data, dim_location):
+def transform_custom(data, dim_weather):
     """
-    Index(['dim_location_id', 'Street', 'City', 'Zipcode', 'State', 'County',
-       'Country', 'Timezone'],
-      dtype='object')
+    Index(['Weather_Timestamp', 'dim_weather_cond_id'], dtype='object')
+
+
 
 
     """
     conn = psycopg2.connect("dbname=USAAccidents user=postgres password=admin")
     cur = conn.cursor()
-    for index, row in dim_location.iterrows():
+    for index, row in dim_weather.iterrows():
         try:
             conn.autocommit = False
-
-            row["Street"] = escape_single_quotes(row["Street"]) 
-            row["City"] = escape_single_quotes(row["City"]) 
-            row["Zipcode"] = escape_single_quotes(row["Zipcode"]) 
-            row["State"] = escape_single_quotes(row["State"]) 
-            row["County"] = escape_single_quotes(row["County"]) 
-            row["Country"] = escape_single_quotes(row["Country"]) 
-            row["Timezone"] = escape_single_quotes(row["Timezone"]) 
             
             
             command = f"""
-                        INSERT INTO Dimlocation
-                        VALUES ({row["dim_location_id"]}, '{row["Street"]}','{row["City"]}','{row["Zipcode"]}',
-                        '{row["State"]}','{row["County"]}','{row["Country"]}','{row["Timezone"]}')
+                        INSERT INTO Dimweather
+                        VALUES ('{row["Weather_Timestamp"]}', 
+                                {row["dim_weather_cond_id"]})
                         ON CONFLICT DO NOTHING;
                     """
             cur.execute(command)
@@ -57,6 +49,7 @@ def transform_custom(data, dim_location):
 
     cur.close()
     conn.close()
+
 
 
 
