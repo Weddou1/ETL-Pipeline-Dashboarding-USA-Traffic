@@ -265,7 +265,7 @@ blocks:
   language: python
   name: sql_insert_fact_accidents
   retry_config: null
-  status: failed
+  status: updated
   type: custom
   upstream_blocks:
   - database_creator
@@ -411,7 +411,7 @@ name: USA ETL
 notification_config: {}
 spark_config: {}
 type: python
-updated_at: '2023-07-12 17:41:46'
+updated_at: '2023-07-12 21:27:03'
 uuid: usa_etl
 variables: {}
 widgets: []
