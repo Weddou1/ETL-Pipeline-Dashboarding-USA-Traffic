@@ -265,7 +265,7 @@ blocks:
   language: python
   name: sql_insert_fact_accidents
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
@@ -313,7 +313,7 @@ blocks:
   language: python
   name: sql_insert_dim_accident_location
   retry_config: null
-  status: executed
+  status: updated
   type: custom
   upstream_blocks:
   - database_creator
@@ -345,7 +345,7 @@ blocks:
   language: python
   name: sql_insert_dim_airport_code
   retry_config: null
-  status: executed
+  status: updated
   type: custom
   upstream_blocks:
   - database_creator
@@ -393,7 +393,7 @@ blocks:
   language: python
   name: sql_insert_dimwind
   retry_config: null
-  status: executed
+  status: updated
   type: custom
   upstream_blocks:
   - database_creator
@@ -411,7 +411,7 @@ name: USA ETL
 notification_config: {}
 spark_config: {}
 type: python
-updated_at: '2023-07-12 21:27:03'
+updated_at: '2023-07-13 12:07:53'
 uuid: usa_etl
 variables: {}
 widgets: []

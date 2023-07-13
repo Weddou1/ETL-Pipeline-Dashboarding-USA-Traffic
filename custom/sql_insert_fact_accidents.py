@@ -33,8 +33,11 @@ def convert_date_nan_to_null(value):
             return '1700-01-01'
         else:
             return value
+    elif value is None:
+        return '1700-01-01'
     else:
         return value
+
 
 
 def escape_single_quotes(value):
@@ -61,7 +64,6 @@ def transform_custom(data, fact_accidents):
     conn = psycopg2.connect("dbname=USAAccidents user=postgres password=admin")
     cur = conn.cursor()
     for index, row in fact_accidents.iterrows():
-
         try:
             conn.autocommit = False
 
@@ -72,7 +74,7 @@ def transform_custom(data, fact_accidents):
             row['End_Lng']=convert_nan_to_null(row['End_Lng'])
             row['Distance(mi)']=convert_nan_to_null(row['Distance(mi)'])
             row['Description']=convert_nan_to_null(row['Description'])
-            
+            row['Description']=escape_single_quotes(row['Description'])
             row['Temperature(F)']=convert_nan_to_null(row['Temperature(F)'])
             row['Humidity(%)']=convert_nan_to_null(row['Humidity(%)'])
             row['Pressure(in)']=convert_nan_to_null(row['Pressure(in)'])

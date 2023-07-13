@@ -6,6 +6,45 @@ if 'test' not in globals():
 
 import psycopg2
 
+
+def convert_nan_to_null(value):
+    if isinstance(value, (int, float)):
+        if math.isnan(value):
+            return 'null'
+        else:
+            return value
+    elif isinstance(value, str):
+        if value.lower() == 'nan':
+            return 'null'
+        else:
+            return value
+    else:
+        return value
+
+def convert_date_nan_to_null(value):
+    if isinstance(value, (int, float)):
+        if math.isnan(value):
+            return '1700-01-01'
+        else:
+            return value
+    elif isinstance(value, str):
+        if value.lower() == 'nan' or value.lower() == 'none':
+            return '1700-01-01'
+        else:
+            return value
+    elif value is None:
+        return '1700-01-01'
+    else:
+        return value
+
+
+
+def escape_single_quotes(value):
+    if isinstance(value, str):
+        return value.replace("'", "''")
+    return value
+
+
 @custom
 def transform_custom(data, dim_cond_wind):
 
