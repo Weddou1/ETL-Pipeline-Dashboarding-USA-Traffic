@@ -6,7 +6,9 @@ if 'test' not in globals():
 import psycopg2
 
 @custom
-def transform_custom(data, *args, **kwargs):
+def transform_custom(*args, **kwargs):
+
+
     conn = psycopg2.connect("dbname=USAAccidents user=postgres password=admin")
     cur = conn.cursor()
 
@@ -16,7 +18,7 @@ def transform_custom(data, *args, **kwargs):
         command = """
             CREATE TABLE IF NOT EXISTS DimCondWind (
                 wind_cond_id SERIAL,
-                wind_cond VARCHAR(5),
+                wind_cond VARCHAR(20),
                 CONSTRAINT pk_DimCondWind PRIMARY KEY(wind_cond_id)
             );
 
@@ -40,7 +42,7 @@ def transform_custom(data, *args, **kwargs):
 
             CREATE TABLE IF NOT EXISTS DimAirportCode(
                 airport_code_id SERIAL,
-                airport_code VARCHAR(8),
+                airport_code VARCHAR(12),
                 CONSTRAINT pk_DimAirportCode PRIMARY KEY(airport_code_id)
             );
 
@@ -48,12 +50,12 @@ def transform_custom(data, *args, **kwargs):
             CREATE TABLE IF NOT EXISTS DimLocation(
                 pk_dim_location_id SERIAL,
                 Street VARCHAR(50),
-                City VARCHAR(20),
-                Zipcode VARCHAR(20),
-                State VARCHAR(20),
-                County VARCHAR(20),
-                Country VARCHAR(20),
-                Timezone VARCHAR(20),
+                City VARCHAR(50),
+                Zipcode VARCHAR(50),
+                State VARCHAR(50),
+                County VARCHAR(50),
+                Country VARCHAR(50),
+                Timezone VARCHAR(50),
                 CONSTRAINT pk_DimLocation PRIMARY KEY(pk_dim_location_id)
             );
 
@@ -96,13 +98,13 @@ def transform_custom(data, *args, **kwargs):
                 End_Lat REAL,
                 End_Lng REAL,
                 Distance REAL,
-                Description VARCHAR(280),
-                Temperature numeric(3,1),
+                Description text,
+                Temperature REAL,
                 Humidity SMALLINT,
                 Pressure REAL,
                 Visibility REAL,
                 binary_road_attribute_id VARCHAR(18),
-                binary_road_period_id VARCHAR(18),
+                binary_day_period_id VARCHAR(18),
                 wind_id SERIAL,
                 source_id SERIAL,
                 Weather_Timestamp TIMESTAMP,

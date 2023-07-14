@@ -30,7 +30,7 @@ def transform_custom(data, *args, **kwargs):
     """
     # Specify your custom logic here
 
-    return data.iloc[:,1:]
+    return data.iloc[:,0:]
 
 
 @test

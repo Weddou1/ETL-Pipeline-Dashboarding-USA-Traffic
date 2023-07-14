@@ -23,14 +23,14 @@ def transform(df, dim_volatile_day_period, dim_volatile_road_attribute,dim_sourc
         'Bump', 'Crossing', 'Give_Way', 'Junction', 'No_Exit', 'Railway',
         'Roundabout', 'Station', 'Stop', 'Traffic_Calming', 'Traffic_Signal',
         'Turning_Loop']
-
-    #print(dim_volatile_road_attribute)
+        
     fact_accidents=get_unique_values(df,fact_table + fact_table_day + fact_table_road)
+    print("test 2")
 
     fact_accidents=fact_accidents.merge(dim_volatile_road_attribute,on=fact_table_road,how="left")
     
     fact_accidents=fact_accidents.merge(dim_volatile_day_period,on=fact_table_day,how="left")
-
+    
     selected_columns = list(range(0, 12)) + [-1, -2]
     fact_accidents = fact_accidents.iloc[:, selected_columns]
 

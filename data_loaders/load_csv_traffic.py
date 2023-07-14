@@ -16,7 +16,7 @@ def load_data_from_file(*args, **kwargs):
 
     Docs: https://docs.mage.ai/design/data-loading#fileio
     """
-    filepath = r'H:\Users\xfour\Prog\ETLProjet\Sample.csv'
+    filepath = kwargs["path"]
 
     return FileIO().load(filepath)
 

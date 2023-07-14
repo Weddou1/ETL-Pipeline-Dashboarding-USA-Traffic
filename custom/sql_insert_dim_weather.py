@@ -62,17 +62,22 @@ def transform_custom(data, dim_weather):
         try:
             conn.autocommit = False
             
+            row["Weather_Timestamp"]=convert_date_nan_to_null(row["Weather_Timestamp"])
             
+
             command = f"""
                         INSERT INTO Dimweather
                         VALUES ('{row["Weather_Timestamp"]}', 
                                 {row["dim_weather_cond_id"]})
                         ON CONFLICT DO NOTHING;
                     """
+
             cur.execute(command)
 
             conn.commit()
         except psycopg2.Error as e:
+            print(row["Weather_Timestamp"])
+            print(command)
             conn.rollback()
             print("Error: ", e)
         finally:

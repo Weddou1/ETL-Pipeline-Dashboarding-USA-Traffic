@@ -10,11 +10,11 @@ blocks:
   language: python
   name: load csv traffic
   retry_config: null
-  status: executed
+  status: updated
   type: data_loader
   upstream_blocks: []
   uuid: load_csv_traffic
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: grey
   configuration: {}
   downstream_blocks:
@@ -40,7 +40,7 @@ blocks:
   upstream_blocks:
   - load_csv_traffic
   uuid: functions
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -57,7 +57,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_source
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -75,7 +75,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_cond_wind
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -93,7 +93,7 @@ blocks:
   - functions
   - dim_cond_wind
   uuid: dim_wind
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -110,7 +110,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_airport_code
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -127,7 +127,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_location
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -145,7 +145,7 @@ blocks:
   - dim_airport_code
   - dim_location
   uuid: dim_accident_location
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -162,7 +162,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_weather_cond
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -179,7 +179,7 @@ blocks:
   - functions
   - dim_weather_cond
   uuid: dim_weather
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -195,7 +195,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_volatile_day_period
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -211,7 +211,7 @@ blocks:
   upstream_blocks:
   - functions
   uuid: dim_volatile_road_attribute
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -255,7 +255,7 @@ blocks:
   type: custom
   upstream_blocks: []
   uuid: database_creator
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -271,7 +271,7 @@ blocks:
   - database_creator
   - fact_accidents
   uuid: sql_insert_fact_accidents
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -281,13 +281,13 @@ blocks:
   language: python
   name: sql_insert_dim_weather
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
   - dim_weather
   uuid: sql_insert_dim_weather
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -297,13 +297,13 @@ blocks:
   language: python
   name: sql_insert_dim_weather_cond
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
   - dim_weather_cond
   uuid: sql_insert_dim_weather_cond
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -313,13 +313,13 @@ blocks:
   language: python
   name: sql_insert_dim_accident_location
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
   - dim_accident_location
   uuid: sql_insert_dim_accident_location
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -329,45 +329,13 @@ blocks:
   language: python
   name: sql_insert_dim_location
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
   - dim_location
   uuid: sql_insert_dim_location
-- all_upstream_blocks_executed: true
-  color: teal
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: sql_insert_dim_airport_code
-  retry_config: null
-  status: updated
-  type: custom
-  upstream_blocks:
-  - database_creator
-  - dim_airport_code
-  uuid: sql_insert_dim_airport_code
-- all_upstream_blocks_executed: true
-  color: teal
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: sql_insert_dim_source
-  retry_config: null
-  status: updated
-  type: custom
-  upstream_blocks:
-  - database_creator
-  - dim_source
-  uuid: sql_insert_dim_source
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -377,13 +345,45 @@ blocks:
   language: python
   name: sql_insert_dimCondWind
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
   - dim_cond_wind
   uuid: sql_insert_dimcondwind
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dim_airport_code
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_airport_code
+  uuid: sql_insert_dim_airport_code
+- all_upstream_blocks_executed: false
+  color: teal
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: sql_insert_dim_source
+  retry_config: null
+  status: executed
+  type: custom
+  upstream_blocks:
+  - database_creator
+  - dim_source
+  uuid: sql_insert_dim_source
+- all_upstream_blocks_executed: false
   color: teal
   configuration: {}
   downstream_blocks: []
@@ -393,7 +393,7 @@ blocks:
   language: python
   name: sql_insert_dimwind
   retry_config: null
-  status: updated
+  status: executed
   type: custom
   upstream_blocks:
   - database_creator
@@ -409,9 +409,11 @@ executor_type: null
 extensions: {}
 name: USA ETL
 notification_config: {}
+retry_config: {}
 spark_config: {}
+tags: []
 type: python
-updated_at: '2023-07-13 12:07:53'
+updated_at: '2023-07-14 18:28:56'
 uuid: usa_etl
 variables: {}
 widgets: []
